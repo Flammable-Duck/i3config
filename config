@@ -152,11 +152,11 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id clearine
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -185,6 +185,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Make the currently focused window a scratchpad
+bindsym $mod+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+plus scratchpad show
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
@@ -194,6 +200,13 @@ bindsym $mod+r mode "resize"
 focus_follows_mouse no
 
 new_window 1pixel
+hide_edge_borders smart
+no_focus [window_role="pop-up"]
+
+# Gaps
+gaps inner 10
+gaps outer -5
+gaps top -10
 
 # Set Wallpaper
 exec_always --no-startup-id ~/.fehbg &
@@ -201,4 +214,14 @@ exec_always --no-startup-id ~/.fehbg &
 exec_always --no-startup-id unclutter
 
 # Screenshots
-bindsym print exec /home/duck/.userscripts/screenshot/normal.sh
+bindsym $mod+c exec /home/duck/.userscripts/screenshot/normal.sh
+bindsym $mod+Shift+c exec /home/duck/.userscripts/screenshot/select_copy.sh
+bindsym $mod+Ctrl+c exec /home/duck/.userscripts/screenshot/select_copy.sh
+
+# Start Albert
+exec_always --no-startup-id ~/.userscripts/albert.sh
+
+# Autostart
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 1; exec mirage'
+exec --no-startup-id i3-msg 'workspace 1; exec discord'
