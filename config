@@ -45,9 +45,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
+set $alt Mod1
 # start a terminal
 bindsym $mod+Return exec kitty
+bindsym $alt+F4 exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -155,8 +156,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 #bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id clearine
+# lock i3
+bindsym $mod+Shift+e exec --no-startup-id i3lock -i /home/duck/Wallpapers/colors/black.png
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -223,5 +224,21 @@ exec_always --no-startup-id ~/.userscripts/albert.sh
 
 # Autostart
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 1; exec mirage'
+exec --no-startup-id i3-msg 'workspace 1; exec element'
 exec --no-startup-id i3-msg 'workspace 1; exec discord'
+
+
+set $bg #0f111b
+set $bg_focused #1b1c36
+set $fg #ecf0c1
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg_focused     $bg_focused     $fg  $bg_focused       $bg_focused
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
+
