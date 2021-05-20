@@ -184,9 +184,6 @@ bindsym $mod+c exec /home/duck/.userscripts/screenshot/normal.sh
 bindsym $mod+Shift+c exec /home/duck/.userscripts/screenshot/select_copy.sh
 bindsym $mod+Ctrl+c exec /home/duck/.userscripts/screenshot/select_copy.sh
 
-# Start Albert
-exec_always --no-startup-id ~/.userscripts/albert.sh
-
 # Autostart
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 1; exec element'
